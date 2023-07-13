@@ -6,4 +6,4 @@ api: Blueprint = Blueprint('coach', __name__, url_prefix = '/coach')
 
 activities = FolksActivities()
 api.route('/folks', methods=['GET'])(activities.get_folks)
-api.route('/folks', methods=['POST'])(activities.create_folks)
+api.route('/folks/<folk_name>', methods=['POST'])(activities.create_folks)
