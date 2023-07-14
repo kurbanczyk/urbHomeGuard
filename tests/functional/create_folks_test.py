@@ -1,6 +1,3 @@
-import sys
-sys.path.append('./../tests')
-
 import requests
 
 from tests.utils.common import generate_random_string
