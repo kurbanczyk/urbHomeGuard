@@ -4,17 +4,29 @@ class S3Client:
     def __init__(self) -> None:
         self.client = boto3.client(
             's3',
-            aws_access_key_id='minio',
-            aws_secret_access_key='minio123'
+            aws_access_key_id = 'minio',
+            aws_secret_access_key = 'minio123',
+            endpoint_url = 'http://s3:9000',
+            region_name='us-east-1'
         )
     
-    def upload_file(self) -> bool:
-        bucket_name = 'your-bucket-name'  # Replace with your bucket name
-        file_name = 'path/to/your/file.txt'  # Replace with the path to your local file
-        self.client.upload_file(
-            file_name,
-            bucket_name,
-            'file.txt'
-        )  # Replace 'file.txt' with the desired S3 key/name for the file
+    def check_bucket_exists(self, bucket_name: str) -> bool:
+        try:
+            self.client.head_bucket(Bucket = bucket_name)
+            return True
+        except Exception:
+            return False
+
+    def upload_file(self, bucket_name: str, image_content) -> bool:
+        if not self.check_bucket_exists(bucket_name):
+            self.client.create_bucket(
+                Bucket = bucket_name
+            )
+        
+        self.client.upload_fileobj(
+            image_content,
+            bucket_name, # folk name acts as bucket name
+            image_content.filename
+        ) 
 
         return True # TODO: error handling

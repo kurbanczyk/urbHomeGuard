@@ -1,5 +1,5 @@
 import json
-from flask import jsonify, make_response
+from flask import jsonify, make_response, request
 from http import HTTPStatus
 
 from guard_coach_service.dao.s3_client import S3Client
@@ -9,7 +9,9 @@ class FolksActivities:
         self.dao = S3Client()
 
     def create_folks(self, folk_name: str) -> json: # TODO: error handling
-        
+        for attached_file in request.files:
+            self.dao.upload_file(folk_name.lower(), request.files[attached_file])
+
         return make_response(
             jsonify({
                 'message': 'Resource created'

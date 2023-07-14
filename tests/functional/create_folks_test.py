@@ -10,15 +10,10 @@ BASE_APP_URL = 'http://localhost:5000/'
 def test_create_new_folk():
     new_folk_name: str = generate_random_string(10)
 
-    with open('tests/functional/test_file.txt', 'rb') as f:
-        data = {
-            'file': (f, 'tests/functional/test_file.txt')
-        }
+    response = requests.post(
+        f'{BASE_APP_URL}/coach/folks/{new_folk_name}',
+        files = {'file': open('tests/functional/cr7.jpg', 'rb')}
+    )
 
-        response = requests.post(
-            f'{BASE_APP_URL}/coach/folks/{new_folk_name}',
-            data=data
-        )
-
-    assert response.status_code == 200
-    assert response.data == b'File uploaded successfully'
+    assert response.status_code == 201
+    assert response.json()['message'] == 'Resource created'
