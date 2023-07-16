@@ -10,15 +10,15 @@ class S3Client:
             region_name='us-east-1'
         )
     
-    def check_bucket_exists(self, bucket_name: str) -> bool:
+    def check_folk_exists(self, bucket_name: str) -> bool:
         try:
             self.client.head_bucket(Bucket = bucket_name)
             return True
         except Exception:
             return False
 
-    def upload_file(self, bucket_name: str, image_content) -> bool:
-        if not self.check_bucket_exists(bucket_name):
+    def upload_folk_photo(self, bucket_name: str, image_content) -> bool:
+        if not self.check_folk_exists(bucket_name):
             self.client.create_bucket(
                 Bucket = bucket_name
             )

@@ -10,7 +10,7 @@ class FolksActivities:
 
     def create_folks(self, folk_name: str) -> json: # TODO: error handling
         for attached_file in request.files:
-            self.dao.upload_file(folk_name.lower(), request.files[attached_file])
+            self.dao.upload_folk_photo(folk_name.lower(), request.files[attached_file])
 
         return make_response(
             jsonify({
