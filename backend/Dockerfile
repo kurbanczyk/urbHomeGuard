@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 ENV FLASK_APP=app
 
-CMD ["python","backend/index.py"]
+CMD ["python","index.py"]
