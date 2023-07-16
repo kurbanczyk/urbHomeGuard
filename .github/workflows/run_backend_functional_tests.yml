@@ -8,6 +8,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Set up Docker Compose
+      uses: docker/compose-cli@v1
+      with:
+        compose-version: 3.x
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:

@@ -1,4 +1,5 @@
 import boto3
+from typing import List
 
 class S3Client:
     def __init__(self) -> None:
@@ -16,6 +17,14 @@ class S3Client:
             return True
         except Exception:
             return False
+
+    def list_existing_folks(self) -> List[str]:
+        response = self.client.list_buckets()
+
+        def get_bucket_name(bucket):
+            return bucket['Name']
+
+        return list(map(get_bucket_name, response['Buckets']))
 
     def upload_folk_photo(self, bucket_name: str, image_content) -> bool:
         if not self.check_folk_exists(bucket_name):

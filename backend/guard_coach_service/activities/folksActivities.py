@@ -24,7 +24,7 @@ class FolksActivities:
 
     def get_folks(self) -> json:
         return make_response(
-            [], # TODO: read folks from S3
+            self.dao.list_existing_folks(),
             HTTPStatus.OK,
             {
                 'Content-Type': 'application/json'
