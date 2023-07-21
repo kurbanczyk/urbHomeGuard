@@ -26,4 +26,5 @@ htmlcov/
 
 # Custom
 
+/backend/encodings.pkl
 /tests/real

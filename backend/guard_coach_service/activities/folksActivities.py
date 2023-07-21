@@ -30,3 +30,12 @@ class FolksActivities:
                 'Content-Type': 'application/json'
             }
         )
+
+    def get_folk_photos(self, folk_name: str) -> json:
+        return make_response(
+            self.dao.list_folk_photos(folk_name),
+            HTTPStatus.OK,
+            {
+                'Content-Type': 'application/json'
+            }
+        )
