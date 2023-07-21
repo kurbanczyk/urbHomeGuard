@@ -1,4 +1,5 @@
 import face_recognition
+import json
 import os
 import pickle
 import tempfile
@@ -23,7 +24,7 @@ class CoachActivities:
 
         return image
 
-    def train(self, model: str = 'hog') -> bool:
+    def train(self, model: str = 'hog') -> json:
         names = []
         encodings = []
 
