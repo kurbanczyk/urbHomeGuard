@@ -30,7 +30,9 @@ class CoachActivities:
         for folk_name in self.dao.list_existing_folks():
             for folk_photo in self.dao.list_folk_photos(folk_name):
                 image_data = self.load_image_from_s3(folk_name, folk_photo['Key'])
-                face_encodings = face_recognition.face_encodings(image_data)
+
+                face_locations = face_recognition.face_locations(image_data, model=model)
+                face_encodings = face_recognition.face_encodings(image_data, face_locations)
 
                 for encoding in face_encodings:
                     names.append(folk_name)
