@@ -11,4 +11,4 @@ api.route('/folks/<folk_name>', methods=['GET'])(folks_activities.get_folk_photo
 api.route('/folks/<folk_name>', methods=['POST'])(folks_activities.create_folks)
 
 coach_activities: CoachActivities = CoachActivities()
-api.route('/train', methods=['GET'])(coach_activities.train)
+api.route('/train', methods=['GET'])(coach_activities.train) # TODO: change to POST
